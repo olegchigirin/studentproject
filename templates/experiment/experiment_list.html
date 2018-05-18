@@ -1,0 +1,20 @@
+<a href="experiment_index.html">Home</a>
+
+{% block content %}
+
+    <h1>Experiments List</h1>
+
+    {% if all_experiments_list %}
+
+        <ul>
+            {% for experiment in all_experiments_list %}
+                <li>
+                    <a href="{{ experiment.id}}">{{ experiment.name }}</a>({{ experiment.description }} {{ experiment.date_of_creation }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>There are no books in the library.</p>
+    {% endif %}
+
+{% endblock %}

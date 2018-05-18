@@ -1,0 +1,26 @@
+<a href="experiment_index.html">Home</a>
+
+
+{% block content %}
+
+    <h1>Experiment Details</h1>
+
+    {% if experiment_details %}
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date of creation</th>
+            </tr>
+            <tr>
+                <td>{{ experiment_details.name }}</td>
+                <td>{{ experiment_details.description }}</td>
+                <td>{{ experiment_details.date_of_creation }}</td>
+            </tr>
+        </table>
+    {% else %}
+        <p>There is now experiment details.</p>
+    {% endif %}
+
+{% endblock %}
