@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="h1" align="center">Data Source Details</h1>
+
+    {% if data_source_details %}
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Source</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>{{ data_source_details.name }}</td>
+                <td>{{ data_source_details.source }}</td>
+                <td>{{ data_source_details.description }}</td>
+            </tr>
+        </table>
+        <div class="container">
+            <div class="align-self-center">
+                <div class="btn-group">
+                    <button class="btn btn-outline-light" value="Link">
+                        <a href="{% url 'experiment:data_set_create' experiment=data_source_details.experiment.pk source=data_source_details.pk %}">
+                            Add dataset
+                        </a>
+                        <a href="{% url 'experiment:dataset_list' experiment=data_source_details.experiment.pk source=data_source_details.pk %}">
+                            Show datasets
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p align="center">There is now experiment for now.</p>
+    {% endif %}
+{% endblock %}

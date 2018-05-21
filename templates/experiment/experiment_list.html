@@ -1,20 +1,30 @@
-<a href="experiment_index.html">Home</a>
+{% extends 'base.html' %}
 
 {% block content %}
-
-    <h1>Experiments List</h1>
+    <h1 align="center">Experiments</h1>
 
     {% if all_experiments_list %}
 
-        <ul>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Name of experiment</th>
+                <th>Description of experiment</th>
+            </tr>
+            </thead>
             {% for experiment in all_experiments_list %}
-                <li>
-                    <a href="{{ experiment.id}}">{{ experiment.name }}</a>({{ experiment.description }} {{ experiment.date_of_creation }})
-                </li>
+                <tbody>
+                <tr>
+                    <td><a href="{{ experiment.id }}">{{ experiment.name }}</a></td>
+                    <td>{{ experiment.description }}</td>
+                </tr>
+                </tbody>
             {% endfor %}
-        </ul>
+        </table>
     {% else %}
-        <p>There are no books in the library.</p>
+        <p align="center">There is now experiment for now. Create new?</p>
     {% endif %}
-
+    <div class="col-md-4 align-self-center">
+        <button class="btn-link"><a href="{% url 'experiment:experiment__create' %}">Create</a></button>
+    </div>
 {% endblock %}

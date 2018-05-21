@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if data_source_list %}
+        <table width="80%">
+            <tr>
+                <th>Name</th>
+                <th>Data source</th>
+                <th>Description</th>
+            </tr>
+            {% for data_source in data_source_list %}
+                <tr>
+                    <td><a href="{{ data_source.id }}">{{ data_source.name }}</a></td>
+                    <td>{{ data_source.source }}</td>
+                    <td>{{ data_source.description }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p align="center">There is no data source. You should add something</p>
+    {% endif %}
+{% endblock %}

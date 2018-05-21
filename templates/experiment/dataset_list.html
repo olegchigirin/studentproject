@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 align="center">Data Sets</h1>
+
+    {% if dataset_list %}
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Columns names</th>
+                <th>DataTypes</th>
+                <th>Description</th>
+                <th>Data Source</th>
+                <th>Data File</th>
+            </tr>
+            </thead>
+            {% for data_set in dataset_list %}
+                <tbody>
+                <tr>
+                    <td><a href="{{ data_set.id }}">{{ data_set.name }}</a></td>
+                    <td>{{ data_set.column_names }}</td>
+                    <td>{{ data_set.column_dtypes }}</td>
+                    <td>{{ data_set.description }}</td>
+                    <td>{{ data_set.data_source }}</td>
+                    <td><a href="{{ data_set.data_file.url}}" download>{{ data_set.data_file }}</a></td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p align="center">There is no data sets? Add something!</p>
+    {% endif %}
+{% endblock %}

@@ -1,26 +1,38 @@
-<a href="experiment_index.html">Home</a>
+{% extends 'base.html' %}
 
 
 {% block content %}
-
-    <h1>Experiment Details</h1>
+    <h1 class="h1" align="center">Experiment Details</h1>
 
     {% if experiment_details %}
-
-        <table>
+        <table class="table">
             <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Date of creation</th>
+                <th width="20%">Name</th>
+                <th width="80%">Description</th>
             </tr>
             <tr>
                 <td>{{ experiment_details.name }}</td>
                 <td>{{ experiment_details.description }}</td>
-                <td>{{ experiment_details.date_of_creation }}</td>
             </tr>
         </table>
+        <div class="container">
+            <div class="align-self-center">
+                <div class="btn-group">
+                    <button class="btn btn-outline-light" value="Link">
+                        <a href="{% url 'experiment:data_source_create' pk=experiment_details.pk %}">
+                            Add data source to experiment
+                        </a>
+                    </button>
+                    <button class="btn btn-outline-light" value="Link">
+                        <a href="{% url 'experiment:data_source_list' pk=experiment_details.pk %}">
+                            Check data sources
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
     {% else %}
-        <p>There is now experiment details.</p>
+        <p align="center">There is now experiment for now.</p>
     {% endif %}
-
 {% endblock %}
+

@@ -1,5 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <ul>
-    <li><a href="{% url 'experiment:index' %}">Home</a></li>
     <li><a href="{% url 'experiment:all_experiments' %} ">Experiments</a></li>
     <li><a href="{% url 'experiment:experiment__create' %}">Create new experiment</a></li>
 </ul>
+
+{% endblock %}
