@@ -21,14 +21,19 @@
     <div class="container">
         <div class="align-self-center">
             <div class="btn-group">
-                <button class="btn btn-outline-light" value="Link">
+                <button class="btn btn-outline-dark">
                     <a href="{% url 'experiment:data_source_create' pk=experiment_id %}">
                         Add data source to experiment
                     </a>
                 </button>
-                <button class="btn btn-outline-light" value="Link">
+                <button class="btn btn-outline-dark">
                     <a href="{% url 'experiment:data_source_list' pk=experiment_id %}">
                         Check data sources
+                    </a>
+                </button>
+                <button class="btn btn-outline-dark">
+                    <a href="{% url 'experiment:all_experiments' %}">
+                        Return to experiments list
                     </a>
                 </button>
             </div>

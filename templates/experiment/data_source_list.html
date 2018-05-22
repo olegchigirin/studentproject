@@ -2,24 +2,35 @@
 
 {% block content %}
     {% if data_source_list %}
-        <table width="80%">
-            <tr>
-                <th>Name</th>
-                <th>Data source</th>
-                <th>Description</th>
-            </tr>
-            {% for data_source in data_source_list %}
+        <div class="container align-middle">
+            <table class="table table-bordered">
                 <tr>
-                    <td><a href="{{ data_source.id }}">{{ data_source.name }}</a></td>
-                    <td>{{ data_source.source }}</td>
-                    <td>{{ data_source.description }}</td>
+                    <th>Name</th>
+                    <th>Data source</th>
+                    <th>Description</th>
                 </tr>
-            {% endfor %}
-        </table>
+                {% for data_source in data_source_list %}
+                    <tr>
+                        <td><a href="{{ data_source.id }}">{{ data_source.name }}</a></td>
+                        <td>{{ data_source.source }}</td>
+                        <td>{{ data_source.description }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     {% else %}
-        <p align="center">There is no data source. You should add something</p>
+        <div class="container align-middle">
+            <p align="center">There is no data source. You should add something</p>
+        </div>
     {% endif %}
-    <button class="btn btn-outline-light" type="button">
-        <a href="{% url 'experiment:data_source_create' pk=experiment %}">Add new data source</a>
-    </button>
+    <div class="container align-middle">
+        <div class="btn-group">
+            <button class="btn btn-outline-dark" type="button">
+                <a href="{% url 'experiment:data_source_create' pk=experiment %}">Add new data source</a>
+            </button>
+            <button class="btn btn-outline-dark" type="button">
+                <a href="{% url 'experiment:experiment_detail' pk=experiment %}">Return to experiment details</a>
+            </button>
+        </div>
+    </div>
 {% endblock %}

@@ -1,30 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1 align="center">Experiments</h1>
+    <h1 align="center" class="h1">Experiments</h1>
 
     {% if all_experiments_list %}
-
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Name of experiment</th>
-                <th>Description of experiment</th>
-            </tr>
-            </thead>
-            {% for experiment in all_experiments_list %}
-                <tbody>
+        <div class="container align-middle">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
                 <tr>
-                    <td><a href="{{ experiment.id }}">{{ experiment.name }}</a></td>
-                    <td>{{ experiment.description }}</td>
+                    <th>Name of experiment</th>
+                    <th>Description of experiment</th>
                 </tr>
-                </tbody>
-            {% endfor %}
-        </table>
+                </thead>
+                {% for experiment in all_experiments_list %}
+                    <tbody>
+                    <tr>
+                        <td><a href="{{ experiment.id }}">{{ experiment.name }}</a></td>
+                        <td>{{ experiment.description }}</td>
+                    </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+        </div>
     {% else %}
-        <p align="center">There is now experiment for now. Create new?</p>
+        <p align="center" class="p-0">There is now experiment for now. Create new?</p>
     {% endif %}
-    <div class="col-md-4 align-self-center">
-        <button class="btn-link"><a href="{% url 'experiment:experiment__create' %}">Create</a></button>
+    <div class="container align-middle">
+        <div class="btn-group">
+            <div class="col-md-4 align-self-center">
+                <button class="btn btn-outline-dark"><a href="{% url 'experiment:experiment__create' %}">Create</a>
+                </button>
+            </div>
+        </div>
     </div>
 {% endblock %}

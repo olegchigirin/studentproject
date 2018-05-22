@@ -59,7 +59,8 @@ class DataSourceCreateView(generic.CreateView):
         return super(DataSourceCreateView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('experiment:experiment_detail', kwargs={'pk': self.kwargs.get('pk')})
+        return reverse('experiment:data_source_details', kwargs={'experiment': self.kwargs.get('pk'),
+                                                                 'pk': self.object.pk})
 
 
 class DataSourceListView(generic.ListView):
@@ -84,6 +85,15 @@ class DataSourceDetailView(generic.DetailView):
     template_name = 'experiment/data_source_details.html'
     context_object_name = 'data_source_details'
 
+    def get_context_data(self, **kwargs):
+        data_source = DataSource.objects.get(pk=self.kwargs.get('pk'))
+        context = {
+            'data_source': data_source,
+            'experiment': self.kwargs.get('experiment'),
+            'source': self.kwargs.get('pk')
+        }
+        return context
+
 
 class DataSetCreateView(generic.CreateView):
     model = DataSet
@@ -96,8 +106,9 @@ class DataSetCreateView(generic.CreateView):
         }
 
     def get_success_url(self):
-        return reverse('experiment:data_source_details', kwargs={'experiment': self.kwargs.get('experiment'),
-                                                                 'pk': self.kwargs.get('source')})
+        return reverse('experiment:dataset_details', kwargs={'experiment': self.kwargs.get('experiment'),
+                                                             'source': self.kwargs.get('source'),
+                                                             'pk': self.object.pk})
 
     def form_valid(self, form):
         dataset: DataSet = form.save(commit=False)
