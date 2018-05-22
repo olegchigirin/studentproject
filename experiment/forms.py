@@ -1,20 +1,24 @@
-from django.forms import ModelForm
-from .models import Experiment, DataSet, DataSource
+from django import forms
+import pandas as pd
+from .models import Experiment, DataSet, DataSource, DataSetColumns
 
 
-class ExperimentForm(ModelForm):
+class ExperimentCreateForm(forms.ModelForm):
     class Meta:
         model = Experiment
         fields = ['name', 'description']
 
 
-class DataSourceForm(ModelForm):
+class DataSourceCreateForm(forms.ModelForm):
     class Meta:
         model = DataSource
-        fields = ['name', 'source', 'description', 'experiment']
+        exclude = ['experiment']
 
 
-class DataSetForm(ModelForm):
+class DataSetCreateForm(forms.ModelForm):
     class Meta:
         model = DataSet
-        fields = ['name', 'column_dtypes', 'column_dtypes', 'description', 'data_source', 'data_file']
+        exclude = ['data_source']
+
+
+

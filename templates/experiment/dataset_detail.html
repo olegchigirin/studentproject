@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="h1">{{ dataset_detail.name }}</h1>
+    </div>
+    <div class="container align-middle">
+        <p class="p-0">
+            {{ dataset_detail.description }}
+        </p>
+    </div>
+    <div class="container align-middle">
+        <p class="p-0">This dataset belongs to {{ dataset_detail.data_source.name }}</p>
+    </div>
+    <div class="container">
+        <h1 class="h1 align-middle">Column Description</h1>
+    </div>
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>
+                    Column name
+                </th>
+                <th>
+                    Column description
+                </th>
+                <th>
+                    Column data type
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for column in dataset_columns %}
+                <tr>
+                    <td>{{ column.column_name }}</td>
+                    <td>{{ column.column_description }}</td>
+                    <td>{{ column.column_dtype }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

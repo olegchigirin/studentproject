@@ -9,8 +9,6 @@
             <thead>
             <tr>
                 <th>Name</th>
-                <th>Columns names</th>
-                <th>DataTypes</th>
                 <th>Description</th>
                 <th>Data Source</th>
                 <th>Data File</th>
@@ -20,11 +18,9 @@
                 <tbody>
                 <tr>
                     <td><a href="{{ data_set.id }}">{{ data_set.name }}</a></td>
-                    <td>{{ data_set.column_names }}</td>
-                    <td>{{ data_set.column_dtypes }}</td>
                     <td>{{ data_set.description }}</td>
                     <td>{{ data_set.data_source }}</td>
-                    <td><a href="{{ data_set.data_file.url}}" download>{{ data_set.data_file }}</a></td>
+                    <td><a href="{{ data_set.data_file.url }}" download>{{ data_set.data_file }}</a></td>
                 </tr>
                 </tbody>
             {% endfor %}
@@ -32,4 +28,7 @@
     {% else %}
         <p align="center">There is no data sets? Add something!</p>
     {% endif %}
+    <button class="btn btn-outline-light" type="button">
+        <a href="{% url 'experiment:data_set_create' experiment=experiment source=source %}">Add new data source</a>
+    </button>
 {% endblock %}

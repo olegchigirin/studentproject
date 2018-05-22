@@ -19,4 +19,7 @@
     {% else %}
         <p align="center">There is no data source. You should add something</p>
     {% endif %}
+    <button class="btn btn-outline-light" type="button">
+        <a href="{% url 'experiment:data_source_create' pk=experiment %}">Add new data source</a>
+    </button>
 {% endblock %}
