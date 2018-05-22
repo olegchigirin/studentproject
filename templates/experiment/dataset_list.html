@@ -30,14 +30,15 @@
     {% endif %}
     <div class="container align-middle">
         <div class="btn-group">
-            <button class="btn btn-outline-dark" type="button">
-                <a href="{% url 'experiment:data_set_create' experiment=experiment source=source %}">Add new data
-                    set</a>
+            <button class="btn btn-outline-dark"
+                    type="button"
+                    onclick="location.href='{% url 'experiment:data_set_create' experiment=experiment source=source %}'">
+                Add new data set
             </button>
-            <button class="btn btn-outline-dark" type="button">
-                <a href="{% url 'experiment:data_source_details' experiment=experiment pk=source %}">
-                    Return to data source
-                </a>
+            <button class="btn btn-outline-dark"
+                    type="button"
+                    onclick="location.href='{% url 'experiment:data_source_details' experiment=experiment pk=source %}'">
+                Return to data source
             </button>
         </div>
     </div>

@@ -9,36 +9,54 @@
             {{ dataset_detail.description }}
         </p>
     </div>
-    <div class="container align-middle">
-        <p class="p-0">This dataset belongs to {{ dataset_detail.data_source.name }}</p>
-    </div>
-    <div class="container">
-        <h1 class="h1 align-middle">Column Description</h1>
-    </div>
-    <div class="container">
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-            <tr>
-                <th>
-                    Column name
-                </th>
-                <th>
-                    Column description
-                </th>
-                <th>
-                    Column data type
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for column in dataset_columns %}
+    {% if dataset_columns %}
+        <div class="container align-middle">
+            <p class="p-0">This dataset belongs to {{ dataset_detail.data_source.name }}</p>
+        </div>
+        <div class="container">
+            <h1 class="h1 align-middle">Column Description</h1>
+        </div>
+        <div class="container">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
                 <tr>
-                    <td>{{ column.column_name }}</td>
-                    <td>{{ column.column_description }}</td>
-                    <td>{{ column.column_dtype }}</td>
+                    <th>
+                        Column name
+                    </th>
+                    <th>
+                        Column description
+                    </th>
+                    <th>
+                        Column data type
+                    </th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for column in dataset_columns %}
+                    <tr>
+                        <td>{{ column.column_name }}</td>
+                        <td>{{ column.column_description }}</td>
+                        <td>{{ column.column_dtype }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="align-middle">There is now Dataset</p>
+    {% endif %}
+    <div class="container align-middle">
+        <div class="btn-group">
+            <button class="btn btn-outline-dark"
+                    type="button"
+                    onclick="location.href='{% url 'experiment:dataset_list' experiment=experiment source=source %}'">
+                Return to dataset list
+            </button>
+            <button class="btn btn-outline-dark"
+                    type="button"
+                    onclick="location.href='{% url 'experiment:data_set_create' experiment=experiment source=source %}'">
+                Add DataSet
+            </button>
+        </div>
     </div>
 {% endblock %}

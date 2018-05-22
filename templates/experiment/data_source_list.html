@@ -4,11 +4,13 @@
     {% if data_source_list %}
         <div class="container align-middle">
             <table class="table table-bordered">
+                <thead class="thead-dark">
                 <tr>
                     <th>Name</th>
                     <th>Data source</th>
                     <th>Description</th>
                 </tr>
+                </thead>
                 {% for data_source in data_source_list %}
                     <tr>
                         <td><a href="{{ data_source.id }}">{{ data_source.name }}</a></td>
@@ -25,11 +27,15 @@
     {% endif %}
     <div class="container align-middle">
         <div class="btn-group">
-            <button class="btn btn-outline-dark" type="button">
-                <a href="{% url 'experiment:data_source_create' pk=experiment %}">Add new data source</a>
+            <button class="btn btn-outline-dark"
+                    type="button"
+                    onclick="location.href='{% url 'experiment:data_source_create' pk=experiment %}'">
+                Add new data source
             </button>
-            <button class="btn btn-outline-dark" type="button">
-                <a href="{% url 'experiment:experiment_detail' pk=experiment %}">Return to experiment details</a>
+            <button class="btn btn-outline-dark"
+                    type="button"
+                    onclick="location.href='{% url 'experiment:experiment_detail' pk=experiment %}'">
+                Return to experiment details
             </button>
         </div>
     </div>

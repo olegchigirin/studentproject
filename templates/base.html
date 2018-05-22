@@ -9,7 +9,11 @@
 <div class="btn-group">
     <div class="container">
         <div class="col-1">
-            <button type="button" class="btn btn-toolbar"><a href="{% url 'experiment:home' %}">Home</a></button>
+            <button type="button"
+                    class="btn btn-toolbar"
+                    onclick="location.href='{% url 'experiment:home' %}'">
+                Home
+            </button>
         </div>
     </div>
 </div>

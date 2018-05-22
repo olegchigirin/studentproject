@@ -21,19 +21,23 @@
     {% endif %}
     <div class="container align-middle">
         <div class="btn-group">
-            <button class="btn btn-outline-dark">
-                <a href="{% url 'experiment:data_set_create' experiment=experiment source=source %}">
-                    Add dataset
-                </a>
+            <button
+                    class="btn btn-outline-dark"
+                    type="button"
+                    onclick="location.href='{% url 'experiment:data_set_create' experiment=experiment source=source %}'"
+            >
+                Add new Dataset
             </button>
-            <button class="btn btn-outline-dark">
-                <a href="{% url 'experiment:dataset_list' experiment=experiment source=source %}">
-                    Show datasets
-                </a>
+            <button class="btn btn-outline-dark"
+                    type="button"
+                    onclick="location.href='{% url 'experiment:dataset_list' experiment=experiment source=source %}'"
+            >
+                Show Datasets
             </button>
-            <button class="btn btn-outline-dark">
-                <a href="{% url 'experiment:experiment_detail' pk=experiment %}">Return
-                    to experiment</a>
+            <button class="btn btn-outline-dark"
+                    type="button "
+                    onclick="location.href='{% url 'experiment:experiment_detail' pk=experiment %}'">
+                Return to experiment
             </button>
         </div>
     </div>
