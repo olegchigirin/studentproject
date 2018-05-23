@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.views import generic
 
 from experiment.forms import DataSetCreateForm
-from experiment.models import DataSet, DataSource, DataSetColumns
+from experiment.models import DataSet, DataSource, DataSetColumn
 from experiment.services import create_column_object
 
 
@@ -55,7 +55,7 @@ class DataSetDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         dataset = DataSet.objects.get(pk=self.kwargs.get('pk'))
-        dataset_columns = DataSetColumns.objects.filter(dataset=dataset)
+        dataset_columns = DataSetColumn.objects.filter(dataset=dataset)
         context = {
             'dataset_detail': dataset,
             'dataset_columns': dataset_columns,

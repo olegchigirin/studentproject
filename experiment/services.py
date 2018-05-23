@@ -1,5 +1,5 @@
 import pandas as pd
-from .models import DataSetColumns, DataSet
+from .models import DataSetColumn, DataSet
 
 
 def create_column_object(dataset_pk: int):
@@ -8,4 +8,4 @@ def create_column_object(dataset_pk: int):
     names = df.columns.values.tolist()
     dtypes = df.dtypes.tolist()
     for name, dtype in zip(names, dtypes):
-        DataSetColumns.objects.create(column_name=name, column_dtype=dtype, dataset=dataset)
+        DataSetColumn.objects.create(column_name=name, column_dtype=dtype, dataset=dataset)
