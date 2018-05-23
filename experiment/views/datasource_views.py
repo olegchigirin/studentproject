@@ -44,7 +44,7 @@ class DataSourceListView(generic.ListView):
 class DataSourceDetailView(generic.DetailView):
     model = DataSource
     template_name = 'experiment/datasource/data_source_details.html'
-    context_object_name = 'data_source_details'
+    context_object_name = 'context'
 
     def get_context_data(self, **kwargs):
         data_source = DataSource.objects.get(pk=self.kwargs.get('pk'))

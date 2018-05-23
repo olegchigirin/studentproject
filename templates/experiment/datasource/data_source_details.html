@@ -2,23 +2,24 @@
 
 {% block content %}
     <h1 class="h1" align="center">Data Source Details</h1>
-
-    {% if data_source_details %}
-        <table class="table">
+    <div class="container align-middle">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
             <tr>
                 <th>Name</th>
                 <th>Source</th>
                 <th>Description</th>
             </tr>
+            </thead>
+            <tbody>
             <tr>
-                <td>{{ data_source_details.name }}</td>
-                <td>{{ data_source_details.source }}</td>
-                <td>{{ data_source_details.description }}</td>
+                <td>{{ data_source.name }}</td>
+                <td>{{ data_source.source }}</td>
+                <td>{{ data_source.description }}</td>
             </tr>
+            </tbody>
         </table>
-    {% else %}
-        <p align="center">There is no datasets for now.</p>
-    {% endif %}
+    </div>
     <div class="container align-middle">
         <div class="btn-group">
             <button
