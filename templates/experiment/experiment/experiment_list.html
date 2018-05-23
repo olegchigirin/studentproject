@@ -25,13 +25,9 @@
     {% else %}
         <p align="center" class="p-0">There is now experiment for now. Create new?</p>
     {% endif %}
-    <div class="container align-middle">
+    <div class="container align-right">
         <div class="btn-group">
-            <button class="btn btn-outline-dark"
-                    type="button"
-                    onclick="location.href='{% url 'experiment:experiment__create' %}'">
-                Create
-            </button>
+            <a href="{% url 'experiment:experiment__create' %}" class="btn btn-outline-dark">Create</a>
         </div>
     </div>
 {% endblock %}
