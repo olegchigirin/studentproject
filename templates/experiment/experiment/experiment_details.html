@@ -1,48 +1,38 @@
-{% extends 'base.html' %}
+{% extends 'basic/base.html' %}
 
+{% block title %}
+    Experiment details
+{% endblock %}
 
-{% block content %}
-    <h1 class="h1" align="center">Experiment Details</h1>
-
-    {% if experiment_details %}
-        <div class="container align-middle">
-            <table class="table table-bordered">
-                <thead class="thead-dark">
-                <tr>
-                    <th width="20%">Name</th>
-                    <th width="80%">Description</th>
-                </tr>
-                </thead>
-                <tr>
-                    <td>{{ experiment_details.name }}</td>
-                    <td>{{ experiment_details.description }}</td>
-                </tr>
-            </table>
-        </div>
-    {% else %}
-        <p align="center">There is no experiment for now.</p>
-    {% endif %}
+{% block beforebutton %}
     <div class="container">
-        <div class="align-self-center">
-            <div class="btn-group">
-                <button class="btn btn-outline-dark"
-                        type="button"
-                        onclick="location.href='{% url 'experiment:data_source_create' pk=experiment_id %}'">
-                    Add data source to experiment
-                </button>
-                <button class="btn btn-outline-dark"
-                        type="button"
-                        onclick="location.href='{% url 'experiment:data_source_list' pk=experiment_id %}'">
-                    Check Data sources
-                </button>
-                <button class="btn btn-outline-dark"
-                        type="button"
-                        onclick="location.href='{% url 'experiment:all_experiments' %}'">
-                    Return to experiments list
-                </button>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="h1 text-center">{{ experiment_details.name }} details
+                        (creator: {{ experiment_details.user }})
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
+    <div class="container">
+        <div class="row">
+            <div class="col text-justify text-center">
+                <div class="p"> {{ experiment_details.description }}</div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+{% block buttons %}
+    <a class="btn btn-outline-dark" href="{% url 'experiment:experiment_all' %}">Return</a>
+    <a class="btn btn-outline-dark" href="{% url 'experiment:dataset_list' experiment=experiment %}">
+        Get datasets
+    </a>
+    <a class="btn btn-outline-dark" href="{% url 'experiment:experiment_update' experiment=experiment %}">
+        Update
+    </a>
+{% endblock %}
+
 

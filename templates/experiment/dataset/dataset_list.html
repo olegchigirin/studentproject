@@ -1,45 +1,35 @@
-{% extends 'base.html' %}
+{% extends 'basic/base_list.html' %}
 
-{% block content %}
-    <h1 align="center">Data Sets</h1>
+{% block title %}
+    Datasets
+{% endblock %}
 
-    {% if dataset_list %}
+{% block contentbefore %}
+    <div class="h1 text-center">Data Sets</div>
+{% endblock %}
 
-        <table class="table table-bordered">
-            <thead class="thead-dark">
+{% if dataset_list %}
+    {% block tablehead %}
+        <th>Name</th>
+        <th>Description</th>
+        <th>Experiment</th>
+        <th>Data File</th>
+    {% endblock %}
+    {% block tablebody %}
+        {% for data_set in dataset_list %}
             <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Data Source</th>
-                <th>Data File</th>
+                <td><a href="{{ data_set.id }}">{{ data_set.name }}</a></td>
+                <td>{{ data_set.description }}</td>
+                <td>{{ data_set.experiment.name }}</td>
+                <td><a href="{{ data_set.data_file.url }}" download>{{ data_set.data_file }}</a></td>
             </tr>
-            </thead>
-            {% for data_set in dataset_list %}
-                <tbody>
-                <tr>
-                    <td><a href="{{ data_set.id }}">{{ data_set.name }}</a></td>
-                    <td>{{ data_set.description }}</td>
-                    <td>{{ data_set.data_source }}</td>
-                    <td><a href="{{ data_set.data_file.url }}" download>{{ data_set.data_file }}</a></td>
-                </tr>
-                </tbody>
-            {% endfor %}
-        </table>
-    {% else %}
-        <p align="center">There is no data sets? Add something!</p>
-    {% endif %}
-    <div class="container align-middle">
-        <div class="btn-group">
-            <button class="btn btn-outline-dark"
-                    type="button"
-                    onclick="location.href='{% url 'experiment:data_set_create' experiment=experiment source=source %}'">
-                Add new data set
-            </button>
-            <button class="btn btn-outline-dark"
-                    type="button"
-                    onclick="location.href='{% url 'experiment:data_source_details' experiment=experiment pk=source %}'">
-                Return to data source
-            </button>
-        </div>
-    </div>
+        {% endfor %}
+    {% endblock %}
+{% else %}
+    <div class="p text-center">There is no data sets. Add something!</div>
+{% endif %}
+
+{% block buttons %}
+    <a class="btn btn-outline-dark" href="{% url 'experiment:dataset_create' experiment=experiment %}">Create new</a>
+    <a class="btn btn-outline-dark" href="{% url 'experiment:experiment_details' experiment=experiment %}">Return</a>
 {% endblock %}

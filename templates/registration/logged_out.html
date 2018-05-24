@@ -1,0 +1,16 @@
+{% extends 'basic/base.html' %}
+
+{% block title %}
+    Logout
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="p-0 col-sm-3 offset-sm-3 offset4">Logged out</div>
+    </div>
+    <div class="container">
+        <div class="btn-group col-sm-3 offset-sm-3 offset4">
+            <a href="{% url 'login' %}" class="btn btn-outline-dark">Click here to login again</a>
+        </div>
+    </div>
+{% endblock %}

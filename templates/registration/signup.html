@@ -1,0 +1,29 @@
+{% extends 'basic/base.html' %}
+
+{% block title %}
+    Sign Up
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="h2 col-sm-3 offset-sm-3 offset4">Sign Up</div>
+    </div>
+    <div class="container">
+        <div class="form-control col-sm-3 offset-sm-3 offset4">
+            <form method="post" class="form">
+                {% csrf_token %}
+                <div class="container">
+                    {% for field in form %}
+                        <div class="form-group">
+                            <div class="p-1">{{ field.label_tag }}</div>
+                            <div>{{ field }}</div>
+                        </div>
+                    {% endfor %}
+                    <div class="btn-group">
+                        <button class="btn btn-outline-dark" type="submit">Sign Up</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'basic/base.html' %}
+
+{% block content %}
+    {% block beforebutton %}
+        {% block contentbefore %}
+        {% endblock %}
+        {% block tablename %}
+        {% endblock %}
+        <div class="container">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    {% block tablehead %}
+                    {% endblock %}
+                </tr>
+                </thead>
+                <tbody>
+                {% block tablebody %}
+                {% endblock %}
+                </tbody>
+            </table>
+        </div>
+        {% block contentafter %}
+        {% endblock %}
+    {% endblock %}
+{% endblock %}

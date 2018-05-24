@@ -1,0 +1,47 @@
+{% extends 'basic/base.html' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <div class="p-0 col-sm-3 offset-sm-3 offset4">Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.
+            </div>
+        {% else %}
+            <div class="p-0 col-sm-3 offset-sm-3 offset4">Please login to see this page.</div>
+        {% endif %}
+    {% endif %}
+
+
+    <div class="container">
+        <div class="form-control col-sm-3 offset-sm-3 offset4">
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="container">
+                    {% for field in form %}
+                        <div class="form-group">
+                            <div class="p-1">{{ field.label_tag }}</div>
+                            <div>{{ field }}</div>
+                        </div>
+                    {% endfor %}
+                    <div class="btn-group">
+                        <button class="btn btn-outline-dark" type="submit">Login</button>
+                        <a class="btn btn-outline-dark" href="{% url 'password_reset' %}">Forgot password?</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if form.errors %}
+        <div class="container">
+            <div class="p-0 col-sm-3 offset-sm-3 offset-4"> Your username and password didn't match. Please try again.
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

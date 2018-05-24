@@ -1,10 +1,17 @@
 from django.db import models
 
-from experiment.models import Experiment
-
 
 class DataSource(models.Model):
-    name = models.CharField(max_length=200)
-    source = models.CharField(max_length=200, default='Personal data')
+    LOCAL = 'local'
+    KAGGLE = 'kaggle'
+
+    DATA_SOURCE_CHOICES = (
+        (LOCAL, 'local'),
+        (KAGGLE, 'kaggle')
+    )
+
+    source = models.CharField(max_length=20, choices=DATA_SOURCE_CHOICES, unique=True)
     description = models.TextField(max_length=2000)
-    experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE, related_name='experiment')
+
+    def __str__(self):
+        return self.source

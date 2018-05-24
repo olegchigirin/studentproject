@@ -1,0 +1,37 @@
+{% extends 'basic/base.html' %}
+
+{% block content %}
+    {% block beforeform %}
+    {% endblock %}
+
+    {% block beforebutton %}
+        {% block form %}
+            <div class="container">
+                <div class="offset-4 span4">
+                    <form class="form" method="post" {% block enctype %}{% endblock %}>
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    {{ field.label_tag }}
+                                </div>
+                                <div class="col-md-10 pull-left">
+                                    {{ field }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="btn-group" style="padding-bottom: 5%; padding-left: 40%">
+                            {% block formbuttons %}
+                            {% endblock %}
+                            <button class="btn btn-primary" type="submit" value="Save">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% endblock %}
+    {% endblock %}
+
+    {% block afterform %}
+    {% endblock %}
+{% endblock %}
+

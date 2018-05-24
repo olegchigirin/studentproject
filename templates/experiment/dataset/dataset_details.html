@@ -1,0 +1,46 @@
+{% extends 'basic/base_list.html' %}
+
+{% block title %}
+    Dataset details
+{% endblock %}
+
+{% block contentbefore %}
+    <div class="container">
+        <h1 class="h1">{{ dataset_detail.name }}</h1>
+    </div>
+    <div class="container align-middle">
+        <p class="p-0">
+            {{ dataset_detail.description }}
+        </p>
+    </div>
+{% endblock %}
+
+{% block tablename %}
+    <div class="h1 text-center">Column Description</div>
+{% endblock %}
+
+{% if dataset_columns %}
+
+    {% block tablehead %}
+        <th> Column name</th>
+        <th> Column description</th>
+        <th> Column data type</th>
+    {% endblock %}
+    {% block tablebody %}
+        {% for column in dataset_columns %}
+            <tr>
+                <td>
+                    <a href="{% url 'experiment:column_update' experiment=experiment dataset=column.dataset.pk column=column.pk %}">{{ column.column_name }}</a>
+                </td>
+                <td>{{ column.column_description }}</td>
+                <td>{{ column.column_dtype }}</td>
+            </tr>
+        {% endfor %}
+    {% endblock %}
+{% else %}
+    <div class="p text-center">There is wrong data in dataset. Check your file please</div>
+{% endif %}
+{% block buttons %}
+    <a class="btn btn-outline-dark" href="{% url 'experiment:dataset_list' experiment=experiment %}">Return</a>
+    <a class="btn btn-outline-dark" href="{% url 'experiment:dataset_create' experiment=experiment %}">Add Dataset</a>
+{% endblock %}

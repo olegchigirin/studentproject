@@ -1,33 +1,40 @@
-{% extends 'base.html' %}
+{% extends 'basic/base_list.html' %}
 
-{% block content %}
-    <h1 align="center" class="h1">Experiments</h1>
-
-    {% if all_experiments_list %}
-        <div class="container align-middle">
-            <table class="table table-bordered">
-                <thead class="thead-dark">
-                <tr>
-                    <th>Name of experiment</th>
-                    <th>Description of experiment</th>
-                </tr>
-                </thead>
-                {% for experiment in all_experiments_list %}
-                    <tbody>
-                    <tr>
-                        <td><a href="{{ experiment.id }}">{{ experiment.name }}</a></td>
-                        <td>{{ experiment.description }}</td>
-                    </tr>
-                    </tbody>
-                {% endfor %}
-            </table>
-        </div>
-    {% else %}
-        <p align="center" class="p-0">There is now experiment for now. Create new?</p>
-    {% endif %}
-    <div class="container align-right">
-        <div class="btn-group">
-            <a href="{% url 'experiment:experiment__create' %}" class="btn btn-outline-dark">Create</a>
-        </div>
-    </div>
+{% block title %}
+    Experiments
 {% endblock %}
+
+{% block tablename %}
+    <div class="h1" align="center">Experiments</div>
+{% endblock %}
+
+{% block tablehead %}
+    <th>Name</th>
+    <th>Description</th>
+    <th>Data Source</th>
+{% endblock %}
+
+{% if experiment_list %}
+
+    {% block tablebody %}
+        {% for experiment in experiment_list %}
+            <tr>
+                <td>
+                    <a href="{% url 'experiment:experiment_details' experiment=experiment.pk %}">{{ experiment.name }}</a>
+                </td>
+                <td>{{ experiment.description }}</td>
+                <td>{{ experiment.data_source }}</td>
+            </tr>
+        {% endfor %}
+    {% endblock %}
+
+{% else %}
+    <div class="p text-center">There is no experiment for now. Create new?</div>
+{% endif %}
+
+{% block buttons %}
+    <a href="{% url 'experiment:home' %}" class="btn btn-outline-dark">Home</a>
+    <a href="{% url 'experiment:experiment_create' %}" class="btn btn-outline-dark">Create</a>
+{% endblock %}
+
+

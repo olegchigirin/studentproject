@@ -1,1 +1,1 @@
-from . import dataset_views, datasource_views, experiment_views, main_views
+from . import dataset_views, experiment_views, main_views, user_views, dataset_columns_view

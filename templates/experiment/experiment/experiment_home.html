@@ -1,9 +1,21 @@
-{% extends 'base.html' %}
+{% extends 'basic/base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
 
 {% block content %}
-<ul>
-    <li><a href="{% url 'experiment:all_experiments' %} ">Experiments</a></li>
-    <li><a href="{% url 'experiment:experiment__create' %}">Create new experiment</a></li>
-</ul>
-
+    <div class="container">
+        <div class="list-group">
+            <div class="row">
+                <div class="col-3"><a class="list list-group-item list-group-item-action"
+                                      href="{% url 'experiment:experiment_all' %} ">Experiments</a></div>
+            </div>
+            <div class="row">
+                <div class="col-3"><a class="list list-group-item list-group-item-action"
+                                      href="{% url 'experiment:experiment_create' %}">Create
+                    new experiment</a></div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
