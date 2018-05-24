@@ -34,7 +34,7 @@ class ExperimentCreateView(mixins.LoginRequiredMixin, generic.CreateView):
         return reverse('experiment:experiment_details', kwargs={'experiment': self.object.pk})
 
 
-class ExperimentDetailView(generic.DetailView):
+class ExperimentDetailView(mixins.LoginRequiredMixin, generic.DetailView):
     model = Experiment
     template_name = 'experiment/experiment/experiment_details.html'
     context_object_name = 'experiment_details'
@@ -47,7 +47,7 @@ class ExperimentDetailView(generic.DetailView):
         return context
 
 
-class ExperimentUpdateView(generic.UpdateView):
+class ExperimentUpdateView(mixins.LoginRequiredMixin, generic.UpdateView):
     model = Experiment
     form_class = ExperimentCreateForm
     template_name = 'experiment/experiment/experiment_update.html'

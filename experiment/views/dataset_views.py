@@ -1,12 +1,13 @@
 from django.urls import reverse
 from django.views import generic
+from django.contrib.auth import mixins
 
 from experiment.forms import DataSetLocalCreateForm, DataSetKaggleCreateForm
 from experiment.models import DataSet, Experiment, DataSetColumn, DataSource
 from experiment.services import create_column_object
 
 
-class DataSetCreateView(generic.CreateView):
+class DataSetCreateView(mixins.LoginRequiredMixin, generic.CreateView):
     model = DataSet
     template_name = 'experiment/dataset/dataset_create.html'
 
@@ -36,7 +37,7 @@ class DataSetCreateView(generic.CreateView):
         return super(DataSetCreateView, self).form_valid(form)
 
 
-class DataSetListView(generic.ListView):
+class DataSetListView(mixins.LoginRequiredMixin, generic.ListView):
     template_name = 'experiment/dataset/dataset_list.html'
     context_object_name = 'context'
 
@@ -53,7 +54,7 @@ class DataSetListView(generic.ListView):
         return context
 
 
-class DataSetDetailView(generic.DetailView):
+class DataSetDetailView(mixins.LoginRequiredMixin, generic.DetailView):
     model = DataSet
     template_name = 'experiment/dataset/dataset_details.html'
     context_object_name = 'dataset_details'

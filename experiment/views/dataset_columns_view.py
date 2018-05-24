@@ -1,11 +1,12 @@
 from django.urls import reverse
 from django.views import generic
+from django.contrib.auth import mixins
 
 from experiment.forms import DataSetColumnUpdateForm
 from experiment.models import DataSetColumn
 
 
-class DataSetColumnUpdateView(generic.UpdateView):
+class DataSetColumnUpdateView(mixins.LoginRequiredMixin, generic.UpdateView):
     model = DataSetColumn
     form_class = DataSetColumnUpdateForm
     template_name = 'experiment/dataset/dataset_columns/dataset_column_update.html'
