@@ -1,15 +1,18 @@
 from django.urls import reverse
 from django.views import generic
 from django.contrib.auth import mixins
+import glob
+import os
 
-from experiment.forms import DataSetLocalCreateForm, DataSetKaggleCreateForm
+from experiment.forms import DataSetLocalCreateForm, DataSetKaggleCreateForm, DataSetKaggleURLForm
 from experiment.models import DataSet, Experiment, DataSetColumn, DataSource
-from experiment.services import create_column_object
+from experiment.services import create_column_object, download_kaggle_files, create_kaggle_datasets
 
 
-class DataSetCreateView(mixins.LoginRequiredMixin, generic.CreateView):
+class DataSetCreateView(mixins.LoginRequiredMixin, generic.FormView):
     model = DataSet
     template_name = 'experiment/dataset/dataset_create.html'
+    object_created = False
 
     def get_context_data(self, **kwargs):
         context = super(DataSetCreateView, self).get_context_data(**kwargs)
@@ -23,18 +26,22 @@ class DataSetCreateView(mixins.LoginRequiredMixin, generic.CreateView):
         if source == DataSource.LOCAL:
             return DataSetLocalCreateForm
         if source == DataSource.KAGGLE:
-            return DataSetKaggleCreateForm
+            return DataSetKaggleURLForm
 
     def get_success_url(self):
-        return reverse('experiment:dataset_details', kwargs={'experiment': self.kwargs.get('experiment'),
-                                                             'dataset': self.object.pk})
+        return reverse('experiment:dataset_list', kwargs={'experiment': self.kwargs.get('experiment')})
 
     def form_valid(self, form):
-        dataset: DataSet = form.save(commit=False)
-        dataset.experiment = Experiment.objects.get(pk=self.kwargs.get('experiment'))
-        dataset.save()
-        create_column_object(dataset.pk)
-        return super(DataSetCreateView, self).form_valid(form)
+        if isinstance(form, DataSetLocalCreateForm):
+            dataset: DataSet = form.save(commit=False)
+            dataset.experiment = Experiment.objects.get(pk=self.kwargs.get('experiment'))
+            dataset.save()
+            create_column_object(dataset.pk)
+            return super(DataSetCreateView, self).form_valid(form)
+        if isinstance(form, DataSetKaggleURLForm):
+            path = download_kaggle_files(form)
+            create_kaggle_datasets(path, self.kwargs.get('experiment'))
+            return super(DataSetCreateView, self).form_valid(form)
 
 
 class DataSetListView(mixins.LoginRequiredMixin, generic.ListView):

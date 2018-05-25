@@ -21,7 +21,9 @@
                 <td><a href="{{ data_set.id }}">{{ data_set.name }}</a></td>
                 <td>{{ data_set.description }}</td>
                 <td>{{ data_set.experiment.name }}</td>
-                <td><a href="{{ data_set.data_file.url }}" download>{{ data_set.data_file }}</a></td>
+                <td>{% if data_set.data_file %}
+                    <a href="{{ data_set.data_file }}" download>{{ data_set.data_file }}</a>{% else %}error with
+                    file{% endif %}</td>
             </tr>
         {% endfor %}
     {% endblock %}

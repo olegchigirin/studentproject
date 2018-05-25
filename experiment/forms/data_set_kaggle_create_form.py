@@ -4,8 +4,6 @@ from experiment.models import DataSet
 
 
 class DataSetKaggleCreateForm(forms.ModelForm):
-    kaggle_url = forms.URLField()
-
     class Meta:
         model = DataSet
-        exclude = ['experiment', 'data_file']
+        exclude = ['experiment', 'data_file', 'description', 'name']

@@ -128,3 +128,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/experiment'
+
+FILE_UPLOAD_PERMISSIONS = 0o644
+
+
