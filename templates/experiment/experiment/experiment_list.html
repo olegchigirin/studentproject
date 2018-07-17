@@ -20,7 +20,7 @@
         {% for experiment in experiment_list %}
             <tr>
                 <td>
-                    <a href="{% url 'experiment:experiment_details' experiment=experiment.pk %}">{{ experiment.name }}</a>
+                    <a href="{% url 'experiment:experiment_details' experiment=experiment.name %}">{{ experiment.label }}</a>
                 </td>
                 <td>{{ experiment.description }}</td>
                 <td>{{ experiment.data_source }}</td>

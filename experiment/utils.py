@@ -1,7 +1,13 @@
-from enum import Enum
+import string
+from random import choices
 
 
-class ChoiceEnum(Enum):
-    @classmethod
-    def choices(cls):
-        return tuple((x.name, x.value) for x in cls)
+def get_slug(model_name: str) -> str:
+    unique = get_random_string_ascii_lowercase()
+    slug = '{}-{}'.format(model_name, unique)
+    return slug
+
+
+def get_random_string_ascii_lowercase(size: int = 8) -> str:
+    result = ''.join(choices(string.ascii_lowercase, k=size))
+    return result

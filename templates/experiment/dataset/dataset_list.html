@@ -8,28 +8,26 @@
     <div class="h1 text-center">Data Sets</div>
 {% endblock %}
 
-{% if dataset_list %}
-    {% block tablehead %}
-        <th>Name</th>
-        <th>Description</th>
-        <th>Experiment</th>
-        <th>Data File</th>
-    {% endblock %}
-    {% block tablebody %}
-        {% for data_set in dataset_list %}
-            <tr>
-                <td><a href="{{ data_set.id }}">{{ data_set.name }}</a></td>
-                <td>{{ data_set.description }}</td>
-                <td>{{ data_set.experiment.name }}</td>
-                <td>{% if data_set.data_file %}
-                    <a href="{{ data_set.data_file }}" download>{{ data_set.data_file }}</a>{% else %}error with
-                    file{% endif %}</td>
-            </tr>
-        {% endfor %}
-    {% endblock %}
-{% else %}
-    <div class="p text-center">There is no data sets. Add something!</div>
-{% endif %}
+
+{% block tablehead %}
+    <th>Name</th>
+    <th>Description</th>
+    <th>Experiment</th>
+    <th>Data File</th>
+{% endblock %}
+{% block tablebody %}
+    {% for dataset in dataset_list %}
+        <tr>
+            <td><a href="{% url 'experiment:dataset_details' experiment=experiment dataset=dataset.name %}">{{ dataset.label }}</a></td>
+            <td>{{ dataset.description }}</td>
+            <td>{{ dataset.experiment.label }}</td>
+            <td>{% if dataset.data_file %}
+                <a href="{{ dataset.data_file }}" download>{{ dataset.data_file }}</a>{% else %}error with
+                file{% endif %}</td>
+        </tr>
+    {% endfor %}
+{% endblock %}
+
 
 {% block buttons %}
     <a class="btn btn-outline-dark" href="{% url 'experiment:dataset_create' experiment=experiment %}">Create new</a>

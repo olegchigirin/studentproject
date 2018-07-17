@@ -6,4 +6,4 @@ from experiment.models import Experiment
 class ExperimentCreateForm(forms.ModelForm):
     class Meta:
         model = Experiment
-        exclude = ['user']
+        exclude = ['user', 'id']

@@ -1,9 +1,11 @@
 version: '3.1'
 
 services:
+  # PostgreSQL database
   db:
     container_name: db.postgres
     image: postgres:9.6
+    hostname: db
     restart: always
     ports:
       - "5432:5432"
@@ -11,3 +13,15 @@ services:
       POSTGRES_USER: 'mydatabaseuser'
       POSTGRES_PASSWORD: 'mypassword'
       POSTGRES_DB: 'mydatabase'
+
+  # Redis
+  redis:
+    container_name: redis
+    image: redis:4.0
+    ports:
+      - "6379:6379"
+
+
+
+
+

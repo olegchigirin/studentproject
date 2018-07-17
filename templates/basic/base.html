@@ -1,29 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load staticfiles %}
-    <meta charset="UTF-8">
-    <link href="{% static 'css/bootstrap.css' %}" type="text/css" rel="stylesheet">
+    {% include 'basic/imports.html' %}
     <title>
         {% block title %}
         {% endblock %}
     </title>
 </head>
 <body>
-<div class="container">
-    <div class="navbar">
-        <div class="btn-group">
-            <a class="btn btn-primary" href="{% url 'experiment:home' %}">Home</a>
-            {% if user.is_authenticated %}
-                <button class="btn btn-primary" type="button">{{ user.get_username }}</button>
-                <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
-            {% else %}
-                <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
-                <a class="btn btn-primary" href="{% url 'experiment:signup' %}">Sign Up</a>
-            {% endif %}
-        </div>
-    </div>
-</div>
+{% include 'basic/navbar.html' %}
 {% block content %}
     {% block beforebutton %}
     {% endblock %}
@@ -37,5 +22,4 @@
 </div>
 
 </body>
-<script src="{% static 'js/bootstrap.js' %}"></script>
 </html>

@@ -19,8 +19,6 @@
     <div class="h1 text-center">Column Description</div>
 {% endblock %}
 
-{% if dataset_columns %}
-
     {% block tablehead %}
         <th> Column name</th>
         <th> Column description</th>
@@ -30,16 +28,13 @@
         {% for column in dataset_columns %}
             <tr>
                 <td>
-                    <a href="{% url 'experiment:column_update' experiment=experiment dataset=column.dataset.pk column=column.pk %}">{{ column.column_name }}</a>
+                    <a href="{% url 'experiment:column_update' experiment=experiment dataset=column.dataset.name column=column.name %}">{{ column.label }}</a>
                 </td>
-                <td>{{ column.column_description }}</td>
-                <td>{{ column.column_dtype }}</td>
+                <td>{{ column.description }}</td>
+                <td>{{ column.datatype }}</td>
             </tr>
         {% endfor %}
     {% endblock %}
-{% else %}
-    <div class="p text-center">There is wrong data in dataset. Check your file please</div>
-{% endif %}
 {% block buttons %}
     <a class="btn btn-outline-dark" href="{% url 'experiment:dataset_list' experiment=experiment %}">Return</a>
     <a class="btn btn-outline-dark" href="{% url 'experiment:dataset_create' experiment=experiment %}">Add Dataset</a>
